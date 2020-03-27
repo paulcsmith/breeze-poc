@@ -4,7 +4,7 @@ class Breeze::SidebarLinks < BaseComponent
     #   img alt: "Workflow", class: "h-8 w-auto", src: "/img/logos/workflow-logo-on-white.svg"
     # end
     nav class: "mt-5 flex-1 px-2 bg-white" do
-      a class: "group flex items-center px-2 py-2 text-sm leading-5 font-medium text-green-100 rounded-md bg-green-400 hover:text-white hover:bg-green-500 focus:outline-none focus:bg-green-500 transition ease-in-out duration-150", href: "#" do
+      link to: Breeze::Requests::Index, class: "group flex items-center px-2 py-2 text-sm leading-5 font-medium text-green-100 rounded-md bg-green-400 hover:text-white hover:bg-green-500 focus:outline-none focus:bg-green-500 transition ease-in-out duration-150" do
         tag "svg", class: "mr-3 h-6 w-6 text-green-200 group-hover:text-white group-focus:text-gray-600 transition ease-in-out duration-150", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" do
           tag "path", d: "M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3a1 1 0 001-1V10M9 21h6", stroke_linecap: "round", stroke_linejoin: "round", stroke_width: "2"
         end

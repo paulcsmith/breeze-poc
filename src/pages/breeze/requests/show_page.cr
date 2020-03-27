@@ -5,8 +5,12 @@ class Breeze::Requests::ShowPage < BreezeLayout
     "Request Details"
   end
 
+  def breadcrumb_parent
+    link "All Requests", to: Index, class: "border-b-2 border-green-400 hover:text-teal-700"
+    mount ArrowSvg.new("mx-1 mb-1 h-5 w-5 text-gray-400 inline-block")
+  end
+
   def content
-    link "Back to all", to: Index
     render_data(@breeze_request)
   end
 
