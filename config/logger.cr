@@ -33,6 +33,10 @@ Lucky.configure do |settings|
   settings.logger = logger
 end
 
+Lucky::Action.configure do |settings|
+  settings.pipe_log_level = nil
+end
+
 Lucky::LogHandler.configure do |settings|
   # Skip logging static assets in development
   if Lucky::Env.development?
