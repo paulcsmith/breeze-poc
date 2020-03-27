@@ -86,23 +86,6 @@ abstract class BreezeLayout
                 end
               end
             end
-            div class: "flex-shrink-0 flex border-t border-gray-200 p-4" do
-              a class: "flex-shrink-0 group block focus:outline-none", href: "#" do
-                div class: "flex items-center" do
-                  div do
-                    img alt: "", class: "inline-block h-10 w-10 rounded-full", src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                  end
-                  div class: "ml-3" do
-                    para class: "text-base leading-6 font-medium text-gray-700 group-hover:text-gray-900" do
-                      text " Tom Cook "
-                    end
-                    para class: "text-sm leading-5 font-medium text-gray-500 group-hover:text-gray-700 group-focus:underline transition ease-in-out duration-150" do
-                      text " View profile "
-                    end
-                  end
-                end
-              end
-            end
           end
           div class: "flex-shrink-0 w-14" do
           end
@@ -111,9 +94,9 @@ abstract class BreezeLayout
       div class: "hidden md:flex md:flex-shrink-0" do
         div class: "flex flex-col w-64 border-r border-gray-200 bg-white" do
           div class: "h-0 flex-1 flex flex-col pt-5 pb-4 overflow-y-auto" do
-            div class: "flex items-center flex-shrink-0 px-4" do
-              img alt: "Workflow", class: "h-8 w-auto", src: "/img/logos/workflow-logo-on-white.svg"
-            end
+            # div class: "flex items-center flex-shrink-0 px-4" do
+            #   img alt: "Workflow", class: "h-8 w-auto", src: "/img/logos/workflow-logo-on-white.svg"
+            # end
             nav class: "mt-5 flex-1 px-2 bg-white" do
               a class: "group flex items-center px-2 py-2 text-sm leading-5 font-medium text-gray-900 rounded-md bg-gray-100 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 transition ease-in-out duration-150", href: "#" do
                 tag "svg", class: "mr-3 h-6 w-6 text-gray-500 group-hover:text-gray-500 group-focus:text-gray-600 transition ease-in-out duration-150", fill: "none", stroke: "currentColor", viewBox: "0 0 24 24" do
