@@ -34,7 +34,10 @@ abstract class BreezeLayout
         end
         main class: "flex-1 relative z-0 overflow-y-auto pt-2 pb-6 focus:outline-none md:py-6", tabindex: "0", x_data: "", x_init: "$el.focus()" do
           div class: "max-w-7xl mx-auto px-4 sm:px-6 md:px-8" do
-            h1 page_title, class: "text-2xl font-semibold text-gray-900"
+            h1 class: "ml-5 mb-1 text-2xl font-semibold text-gray-900" do
+              render_if_defined(:breadcrumb_parent)
+              text page_title
+            end
           end
           div class: "max-w-7xl mx-auto px-4 sm:px-6 md:px-8" do
             div class: "py-4" do
