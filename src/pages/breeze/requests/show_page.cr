@@ -21,9 +21,7 @@ class Breeze::Requests::ShowPage < BreezeLayout
           text req.action
         end
         para class: "mt-1 max-w-2xl text-sm leading-5 text-gray-500" do
-          span class: "inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium leading-5 bg-gray-100 text-gray-800" do
-            text req.method.upcase
-          end
+          mount HttpMethodBadge.new(req.method)
           text " #{req.path}"
         end
       end
