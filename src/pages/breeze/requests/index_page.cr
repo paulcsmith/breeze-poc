@@ -31,9 +31,7 @@ class Breeze::Requests::IndexPage < BreezeLayout
               div class: "hidden md:block" do
                 div do
                   div class: "text-sm leading-5 text-gray-900" do
-                    span class: "inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium leading-5 bg-gray-100 text-gray-800" do
-                      text req.method.upcase
-                    end
+                    mount HttpMethodBadge.new(req.method)
                     text " #{req.path}"
                   end
                 end
