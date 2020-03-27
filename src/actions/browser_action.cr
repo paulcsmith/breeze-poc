@@ -2,6 +2,20 @@ abstract class BrowserAction < Lucky::Action
   include Lucky::ProtectFromForgery
   accepted_formats [:html, :json], default: :html
 
+  after store_breeze
+
+  def store_breeze : Continue
+    BreezeRequest::SaveOperation.create!(
+      path: request.resource,
+      method: request.method,
+      action: self.class.name,
+      status: response.status_code,
+      session: JSON.parse(session.to_json),
+      headers: JSON.parse(request.headers.to_h.to_json)
+    )
+    continue
+  end
+
   # This module provides current_user, sign_in, and sign_out methods
   include Authentic::ActionHelpers(User)
 
