@@ -25,22 +25,13 @@ class Breeze::Requests::IndexPage < BreezeLayout
         div class: "flex items-center px-4 py-4 sm:px-4" do
           div class: "min-w-0 flex-1 flex items-center" do
             div class: "min-w-0 flex-1 px-4 md:grid md:grid-cols-3 md:gap-4" do
-              div do
-                div req.action, class: "text-sm leading-5 font-medium text-teal-500 truncate"
+              div { mount Breeze::Badge.new(req) }
+              div class: "hidden md:block" do
+                div req.action, class: "text-sm leading-5 text-indigo-700 truncate"
               end
               div class: "hidden md:block" do
-                div do
-                  div class: "text-sm leading-5 text-gray-900" do
-                    mount HttpMethodBadge.new(req.method)
-                    text " #{req.path}"
-                  end
-                end
-              end
-              div class: "hidden md:block" do
-                div do
-                  div class: "text-sm leading-5 text-gray-900" do
-                    text "#{time_ago_in_words(req.created_at)} ago"
-                  end
+                div class: "text-sm leading-5 text-gray-500" do
+                  text "#{time_ago_in_words(req.created_at)} ago"
                 end
               end
             end
