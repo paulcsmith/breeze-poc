@@ -7,4 +7,8 @@ class BreezeRequest < BaseModel
     column session : JSON::Any
     column headers : JSON::Any
   end
+
+  def method : String
+    previous_def.upcase
+  end
 end
