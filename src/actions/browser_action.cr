@@ -1,5 +1,6 @@
 abstract class BrowserAction < Lucky::Action
   include Lucky::ProtectFromForgery
+  include Lucky::Paginator::BackendHelpers
   accepted_formats [:html, :json], default: :html
 
   after store_breeze
