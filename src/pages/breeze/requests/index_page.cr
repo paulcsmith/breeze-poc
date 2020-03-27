@@ -21,7 +21,7 @@ class Breeze::Requests::IndexPage < BreezeLayout
 
   def request_row(req)
     li class: "border-t border-gray-200" do
-      a class: "block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out", href: "#" do
+      link class: "block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out", to: Show.with(req.id) do
         div class: "flex items-center px-4 py-4 sm:px-4" do
           div class: "min-w-0 flex-1 flex items-center" do
             div class: "min-w-0 flex-1 px-4 md:grid md:grid-cols-3 md:gap-4" do
