@@ -1,7 +1,7 @@
 class Breeze::Requests::IndexPage < BreezeLayout
   needs breeze_requests : BreezeRequestQuery
 
-  def page_title
+  def page_title : String
     "All Requests"
   end
 
