@@ -22,16 +22,34 @@ class Breeze::Requests::ShowPage < BreezeLayout
       end
       div class: "px-4 py-5 sm:p-0" do
         dl do
-          req.session.as_h.each do |key, value|
-            div class: "mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5" do
-              dt class: "text-sm leading-5 font-medium text-gray-500" do
-                text "Session #{key}"
-              end
-              dd class: "mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2" do
-                text value.as_s
-              end
-            end
-          end
+          render_session_info(req)
+          render_header_info(req)
+        end
+      end
+    end
+  end
+
+  def render_session_info(req)
+    req.session.as_h.each do |key, value|
+      div class: "mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5" do
+        dt class: "text-sm leading-5 font-medium text-gray-500" do
+          text "Session #{key}"
+        end
+        dd class: "mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2" do
+          text value.as_s
+        end
+      end
+    end
+  end
+
+  def render_header_info(req)
+    req.headers.as_h.each do |key, value|
+      div class: "mt-8 sm:mt-0 sm:grid sm:grid-cols-3 sm:gap-4 sm:border-t sm:border-gray-200 sm:px-6 sm:py-5" do
+        dt class: "text-sm leading-5 font-medium text-gray-500" do
+          text "Header #{key}"
+        end
+        dd class: "mt-1 text-sm leading-5 text-gray-900 sm:mt-0 sm:col-span-2" do
+          text value[0].as_s
         end
       end
     end
