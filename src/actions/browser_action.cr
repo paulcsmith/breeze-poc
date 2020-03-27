@@ -5,7 +5,7 @@ abstract class BrowserAction < Lucky::Action
   after store_breeze
 
   def store_breeze : Continue
-    BreezeRequest::SaveOperation.create!(
+    req = BreezeRequest::SaveOperation.create!(
       path: request.resource,
       method: request.method,
       action: self.class.name,
@@ -13,6 +13,7 @@ abstract class BrowserAction < Lucky::Action
       session: JSON.parse(session.to_json),
       headers: JSON.parse(request.headers.to_h.to_json)
     )
+    Lucky.logger.debug(debug_at: Breeze::Requests::Show.url(req.id))
     continue
   end
 
