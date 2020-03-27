@@ -2,6 +2,7 @@ class Breeze::Requests::Index < BrowserAction
   include Auth::AllowGuests
 
   get "/breeze" do
-    html IndexPage, breeze_requests: BreezeRequestQuery.new.created_at.desc_order
+    pages, records = paginate(BreezeRequestQuery.new.created_at.desc_order)
+    html IndexPage, breeze_requests: records, pages: pages
   end
 end

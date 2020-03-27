@@ -1,4 +1,5 @@
 class Breeze::Requests::IndexPage < BreezeLayout
+  needs pages : Lucky::Paginator
   needs breeze_requests : BreezeRequestQuery
 
   def page_title : String
@@ -16,6 +17,8 @@ class Breeze::Requests::IndexPage < BreezeLayout
           request_row(req)
         end
       end
+
+      mount Breeze::PageNav.new(@pages)
     end
   end
 
