@@ -2,12 +2,12 @@ class Breeze::PageNav < BaseComponent
   needs pages : Lucky::Paginator
 
   def render
-    div aria_label: "pagination", role: "navigation", class: "bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6" do
+    div aria_label: "pagination", role: "navigation", class: "bg-gray-50 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6" do
+      next_and_previous_links_for_small_screens
       div class: "hidden sm:flex-1 sm:flex sm:items-center sm:justify-between" do
         page_metadata
-        next_and_previous_links_for_small_screens
 
-        div do
+        div class: "cursor-pointer" do
           span class: "relative z-0 inline-flex shadow-sm" do
             prev_arrow_link
             page_links
@@ -25,23 +25,26 @@ class Breeze::PageNav < BaseComponent
   end
 
   def render_page_item(page : Lucky::Paginator::Page)
-    a page.number, href: page.path,
-      class: "-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+    a page.number, href: page.path, class: button_styles
   end
 
   def render_page_item(page : Lucky::Paginator::CurrentPage)
     span page.number,
-      class: "-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+      class: "#{button_styles} cursor-default bg-blue-100 hover:bg-blue-100 text-blue-800"
+  end
+
+  def button_styles
+    "-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-800 hover:bg-gray-100 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
   end
 
   def render_page_item(gap : Lucky::Paginator::Gap)
-    span class: "-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700" do
+    span class: "cursor-default -ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700" do
       text " ... "
     end
   end
 
   def prev_arrow_link
-    a href: pages.path_to_next || "#", class: "relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150" do
+    a href: pages.path_to_previous || "#", class: "-mr-px px-4 rounded-l-md #{button_styles}" do
       tag "svg", class: "h-5 w-5", fill: "currentColor", viewBox: "0 0 20 20" do
         tag "path",
           clip_rule: "evenodd",
@@ -52,7 +55,7 @@ class Breeze::PageNav < BaseComponent
   end
 
   def next_arrow_link
-    a href: pages.path_to_previous || "#", class: "-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150" do
+    a href: pages.path_to_next || "#", class: "-ml-px px-4 rounded-r-md #{button_styles}" do
       tag "svg", class: "h-5 w-5", fill: "currentColor", viewBox: "0 0 20 20" do
         tag "path", clip_rule: "evenodd", d: "M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z", fill_rule: "evenodd"
       end
@@ -61,16 +64,12 @@ class Breeze::PageNav < BaseComponent
 
   def next_and_previous_links_for_small_screens
     div class: "flex-1 flex justify-between sm:hidden" do
-      prev_path = @pages.path_to_previous
       a "Previous",
-        href: prev_path || "#",
+        href: @pages.path_to_previous || "#",
         class: "relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
-      a class: "relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150", href: "#" do
-        text " Previous "
-      end
-      a class: "ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150", href: "#" do
-        text " Next "
-      end
+      a "Next",
+        href: @pages.path_to_next || "#",
+        class: "ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
     end
   end
 
