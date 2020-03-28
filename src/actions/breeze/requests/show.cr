@@ -1,4 +1,4 @@
-class Breeze::Requests::Show < BrowserAction
+class Breeze::Requests::Show < BreezeAction
   include Auth::AllowGuests
 
   route do

@@ -1,4 +1,4 @@
-class Breeze::Requests::Index < BrowserAction
+class Breeze::Requests::Index < BreezeAction
   include Auth::AllowGuests
 
   get "/breeze" do
