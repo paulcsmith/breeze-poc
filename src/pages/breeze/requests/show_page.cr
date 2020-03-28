@@ -15,7 +15,7 @@ class Breeze::Requests::ShowPage < BreezeLayout
   end
 
   def render_data(req)
-    div class: "bg-white shadow overflow-hidden  sm:rounded-lg" do
+    mount Breeze::Panel.new do
       div class: "px-4 py-5 border-b border-gray-200 sm:px-6" do
         h3 req.action, class: "text-lg leading-6 font-medium text-gray-900"
         div class: "mt-2" { mount Breeze::Badge.new(req) }

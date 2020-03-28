@@ -11,8 +11,8 @@ class Breeze::Requests::IndexPage < BreezeLayout
   end
 
   def render_table
-    div class: "bg-white shadow overflow-hidden sm:rounded-md" do
-      ul do
+    mount Breeze::Panel.new do
+      ul class: "-mt-px" do
         @breeze_requests.each do |req|
           request_row(req)
         end
