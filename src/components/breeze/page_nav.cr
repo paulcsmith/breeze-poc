@@ -4,15 +4,19 @@ class Breeze::PageNav < BaseComponent
   def render
     css = "bg-gray-50 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
     div aria_label: "pagination", role: "navigation", class: css do
-      next_and_previous_links_for_small_screens
+      unless pages.one_page?
+        next_and_previous_links_for_small_screens
+      end
       div class: "hidden sm:flex-1 sm:flex sm:items-center sm:justify-between" do
         page_metadata
 
-        div class: "cursor-pointer" do
-          span class: "relative z-0 inline-flex shadow-sm" do
-            prev_arrow_link
-            page_links
-            next_arrow_link
+        unless pages.one_page?
+          div class: "cursor-pointer" do
+            span class: "relative z-0 inline-flex shadow-sm" do
+              prev_arrow_link
+              page_links
+              next_arrow_link
+            end
           end
         end
       end
