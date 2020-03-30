@@ -7,11 +7,11 @@ class Breeze::PageNav < BaseComponent
       unless pages.one_page?
         next_and_previous_links_for_small_screens
       end
-      div class: "hidden sm:flex-1 sm:flex sm:items-center sm:justify-between" do
+      div class: "sm:flex-1 sm:flex sm:items-center sm:justify-between" do
         page_metadata
 
         unless pages.one_page?
-          div class: "cursor-pointer" do
+          div class: "cursor-pointer hidden sm:inline-block" do
             span class: "relative z-0 inline-flex shadow-sm" do
               prev_arrow_link
               page_links
@@ -98,7 +98,7 @@ class Breeze::PageNav < BaseComponent
   end
 
   def page_metadata
-    div do
+    div class: "#{"hidden sm:flex" unless pages.one_page?}" do
       para class: "text-sm leading-5 text-gray-700" do
         range = pages.item_range
         text " Showing "
