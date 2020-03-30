@@ -18,13 +18,12 @@ class Breeze::Requests::ShowPage < BreezeLayout
     mount Breeze::DescriptionList.new(
       heading_title: ->{ text req.action },
       heading_subtitle: ->{ mount Breeze::Badge.new(req) },
-      list: ->{ render_list }
+      list: ->{
+        mount Breeze::DescriptionListRow.new("Status", req.status.to_s)
+        render_session_info
+        render_header_info
+      }
     )
-  end
-
-  def render_list
-    render_session_info
-    render_header_info
   end
 
   def render_session_info
