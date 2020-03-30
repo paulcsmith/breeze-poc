@@ -1,7 +1,7 @@
 # https://tailwindui.com/components/application-ui/data-display/description-lists#component-e1b5917b21bbe76a73a96c5ca876225f
 class Breeze::DescriptionList < BaseComponent
   needs heading_title : HtmlProc
-  needs heading_subtitle : HtmlProc
+  needs heading_subtitle : HtmlProc?
   needs list : HtmlProc
 
   def render
@@ -17,7 +17,7 @@ class Breeze::DescriptionList < BaseComponent
         heading_title.call
       end
       div class: "mt-2" do
-        heading_subtitle.call
+        heading_subtitle.try(&.call)
       end
     end
   end
