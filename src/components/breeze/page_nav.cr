@@ -2,7 +2,8 @@ class Breeze::PageNav < BaseComponent
   needs pages : Lucky::Paginator
 
   def render
-    div aria_label: "pagination", role: "navigation", class: "bg-gray-50 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6" do
+    css = "bg-gray-50 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6"
+    div aria_label: "pagination", role: "navigation", class: css do
       next_and_previous_links_for_small_screens
       div class: "hidden sm:flex-1 sm:flex sm:items-center sm:justify-between" do
         page_metadata
@@ -34,13 +35,20 @@ class Breeze::PageNav < BaseComponent
   end
 
   def button_styles
-    "-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-800 hover:bg-gray-100 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+    <<-TEXT.lines.join(" ")
+    -ml-px relative inline-flex items-center px-4 py-2 border border-gray-300
+    bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-800
+    hover:bg-gray-100 focus:z-10 focus:outline-none focus:border-blue-300
+    focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700
+    transition ease-in-out duration-150
+    TEXT
   end
 
   def render_page_item(gap : Lucky::Paginator::Gap)
-    span class: "cursor-default -ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700" do
-      text " ... "
-    end
+    span "...", class: <<-TEXT.lines.join(" ")
+      cursor-default -ml-px relative inline-flex items-center px-4 py-2 border
+      border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700
+      TEXT
   end
 
   def prev_arrow_link
@@ -66,10 +74,22 @@ class Breeze::PageNav < BaseComponent
     div class: "flex-1 flex justify-between sm:hidden" do
       a "Previous",
         href: @pages.path_to_previous || "#",
-        class: "relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+        class: <<-TEXT.lines.join(" ")
+          relative inline-flex items-center px-4 py-2 border border-gray-300
+          text-sm leading-5 font-medium rounded-md text-gray-700 bg-white
+          hover:text-gray-500 focus:outline-none focus:shadow-outline-blue
+          focus:border-blue-300 active:bg-gray-100 active:text-gray-700
+          transition ease-in-out duration-150
+          TEXT
       a "Next",
         href: @pages.path_to_next || "#",
-        class: "ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+        class: <<-TEXT.lines.join(" ")
+          ml-3 relative inline-flex items-center px-4 py-2 border
+          border-gray-300 text-sm leading-5 font-medium rounded-md
+          text-gray-700 bg-white hover:text-gray-500 focus:outline-none
+          focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100
+          active:text-gray-700 transition ease-in-out duration-150
+          TEXT
     end
   end
 
